@@ -1,0 +1,45 @@
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: ESP IP Address
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
+    update_interval: 60s
+switch:
+  - platform: gpio
+    id: relay
+    name: relay
+    pin:
+      number: GPIO2
+    on_turn_off:
+      then:
+        switch.turn_off: led
+    on_turn_on:
+      then:
+        switch.turn_on: led
+  - platform: gpio
+    id: led
+    name: led
+    pin:
+      number: GPIO3
+      inverted: yes
+    on_turn_off:
+      then:
+        switch.turn_off: relay
+    on_turn_on:
+      then:
+        switch.turn_on: relay
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 4
+      mode: INPUT_PULLUP
+      inverted: true
+    name: button
+    id: buttonstate
+    filters:
+      - delayed_on_off: 100ms
+    on_press:
+      then:
+        - switch.toggle: relay

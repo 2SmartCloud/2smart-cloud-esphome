@@ -1,0 +1,22 @@
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 30s
+    id: signal
+
+switch:
+  - platform: gpio
+    id: led
+    name: "Led"
+    pin:
+      number: GPIO2
+
+binary_sensor:
+  - platform: reset_sensor
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Reset button"
+    filters:
+      - delayed_on: 1s
