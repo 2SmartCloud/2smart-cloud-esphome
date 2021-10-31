@@ -1,0 +1,80 @@
+light:
+  - platform: fastled_clockless
+    chipset: WS2812B
+    pin: 22
+    num_leds: 300
+    rgb_order: GRB
+    name: FastLED WS2812 Light
+    id: light_rgb
+    effects:
+      - random: null
+      - strobe: null
+      - addressable_scan:
+          move_interval: 50ms
+          scan_width: 4
+      - addressable_random_twinkle:
+          twinkle_probability: 20%
+          progress_interval: 100ms
+      - addressable_color_wipe: null
+      - addressable_rainbow: null
+binary_sensor:
+  - platform: gpio
+    id: led_switch
+    pin:
+      number: GPIO5
+      mode: INPUT_PULLUP
+      inverted: true
+    name: Led switch
+    on_click:
+      then:
+        - light.toggle: light_rgb
+  - platform: gpio
+    id: change_effect
+    pin:
+      number: GPIO4
+      mode: INPUT_PULLUP
+      inverted: true
+    name: Change effect
+    on_click:
+      then:
+        - lambda: !<!lambda> |-
+            uint32_t total = id(light_rgb)->get_effects().size();
+            uint32_t curr_idx = 0;
+            uint32_t i = 0;
+            std::string curr_effect = id(light_rgb)->get_effect_name();
+            auto call = id(light_rgb)->turn_on();
+
+            // set first effect in list
+            if (strcasecmp(curr_effect.c_str(), "none") == 0) {
+              call.set_effect(1);
+              call.perform();
+
+              return;
+            }
+
+            for (auto *effect : id(light_rgb)->get_effects()) {
+              i++;
+              if (strcasecmp(effect->get_name().c_str(), curr_effect.c_str()) == 0)
+                curr_idx = i;
+            }
+
+            if (curr_idx == total) {
+              call.set_effect(0);
+            } else {
+              call.set_effect(curr_idx + 1);
+            }
+
+            call.perform();
+  - platform: reset_sensor
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: true
+    name: Reset button
+    filters:
+      - delayed_on: 1s
+sensor:
+  - platform: wifi_signal
+    name: WiFi1 Signal
+    update_interval: 30s
+    id: wifi_config
