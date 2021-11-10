@@ -1,0 +1,8 @@
+ota:
+  password: securepassword
+switch:
+  - platform: gpio
+    id: led
+    name: "Led"
+    pin:
+      number: GPIO2
