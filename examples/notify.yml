@@ -5,7 +5,8 @@ switch:
     pin:
       number: GPIO2
     on_turn_on:
-      - mqtt.notify:
+      then:
+        - mqtt.notify:
           payload: |-
             root["logLevel"] = "info";
-            root["message"] = "DEVICE TURN ON";
+            root["message"] = "Notification message";
