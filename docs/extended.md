@@ -20,6 +20,6 @@ on_...:
 	  - mqtt.notify:
 		  payload: |-
 			  root["logLevel"] = "info";
-			  root["message"] = "DEVICE TURN ON";
+			  root["message"] = "Notification message";
 ```
 where ```root["logLevel"]``` is the logging level, it can be "error", "warn", "info"
