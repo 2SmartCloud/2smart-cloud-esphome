@@ -7,6 +7,6 @@ switch:
     on_turn_on:
       then:
         - mqtt.notify:
-          payload: |-
-            root["logLevel"] = "info";
-            root["message"] = "Notification message";
+            payload: |-
+              root["logLevel"] = "info";
+              root["message"] = "Notification message";
