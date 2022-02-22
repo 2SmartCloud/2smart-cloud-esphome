@@ -14,6 +14,7 @@ We currently support [ESPHome 2021.10.3](https://esphome.io/changelog/2021.10.0.
 - [Relay with LED](./examples/relay_with_led.yml)
 - [WS2812B FastLED](./examples/ws2812b_fastled.yml)
 - [GPIO switch with OTA](./examples/blinker_with_ota.yml)
+- [GPIO switch with Notify](./examples/notify.yml)
 
 ## Notes
 
