@@ -10,7 +10,10 @@ Extended functionality added in `captive_portal` that allows pair devices via 2S
 
 ## Notifications
 
-```notify``` - is a method made to comfortably manage notifications instead of ```publish_json```. You can use it like:
+```notify``` - is a method made to comfortably manage notifications.
+
+Example:
+
 ```
 on_...:
   then:
