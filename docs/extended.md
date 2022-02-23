@@ -22,4 +22,4 @@ on_...:
 			  root["logLevel"] = "info";
 			  root["message"] = "Notification message";
 ```
-where ```root["logLevel"]``` is the logging level, it can be "error", "warn", "info"
+where ```root["logLevel"]``` is the logging level, it can be "error", "warning", "info"
