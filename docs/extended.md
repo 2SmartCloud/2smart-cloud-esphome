@@ -7,3 +7,19 @@
 ## Pairing mode
 
 Extended functionality added in `captive_portal` that allows pair devices via 2Smart Cloud mobile app.
+
+## Notifications
+
+```notify``` - is a method made to comfortably manage notifications.
+
+Example:
+
+```
+on_...:
+  then:
+	  - mqtt.notify:
+		  payload: |-
+			  root["logLevel"] = "info";
+			  root["message"] = "Notification message";
+```
+where ```root["logLevel"]``` is the logging level, it can be "error", "warning", "info"

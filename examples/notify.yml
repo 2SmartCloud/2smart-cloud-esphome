@@ -1,0 +1,12 @@
+switch:
+  - platform: gpio
+    id: l2
+    name: GPIO2
+    pin:
+      number: GPIO2
+    on_turn_on:
+      then:
+        - mqtt.notify:
+            payload: |-
+              root["logLevel"] = "info";
+              root["message"] = "Notification message";
